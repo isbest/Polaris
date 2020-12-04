@@ -64,7 +64,7 @@
             <div class="card-widget card-announcement">
                 <div class="card-content">
                     <div class="card-anno-conten">
-                        <form action="post">
+                        <form action="#" method="post">
                             <label for="atricleTitle">
                                 文章标题
                                 <input type="text" id="atricleTitle" name="articleTitle"/>
@@ -100,21 +100,19 @@
         icon: 'material',
         upload: {
             accept: "image/*",
-            url: 'http://localhost:8080/article/fileupload',
-            headers: "multipart/form-data",
+            url: '/article/fileupload',
             filename(name) {
-                return name.replace(/[^(a-zA-Z0-9\u4e00-\u9fa5\.)]/g)
+                return name.replace(/[^(a-zA-Z0-9\u4e00-\u9fa5\.)]/g);
             },
             linkToImgCallback() {
-                console.log("api处理")
+                console.log("api处理");
             },
             success(editor, msg) {
-                let responseData = JSON.parse(msg)
-                console.log(responseData.url)
-                return true
+                console.log(msg);
+                console.log(JSON.parse(msg));
             },
             error(msg) {
-                console.log(msg + "上传失败了")
+                console.log(msg + "上传失败了");
             }
         },
     });
