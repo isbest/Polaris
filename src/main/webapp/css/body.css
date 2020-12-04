@@ -1,0 +1,26 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 22px;
+}
+
+body {
+  margin: 0;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-height: 100%;
+  background: #fff;
+  color: #4c4948;
+  font-size: 14.5px;
+  font-family: 'titillium web', Lato, 'PingFang SC', 'Hiragino Sans GB',
+    'microsoft jhenghei', 'microsoft yahei', 'Helvetica Neue', Helvetica, Arial,
+    sans-serif;
+  line-height: 2;
+}

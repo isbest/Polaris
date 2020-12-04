@@ -1,0 +1,288 @@
+nav {
+  height: 100vh;
+  position: relative;
+  background-image: url(../images/background.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+nav a {
+  color: #eee;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+#page-header {
+  width: 100vw;
+  height: 2.2rem;
+  position: fixed;
+  display: block;
+  background-color: transparent;
+  z-index: 2;
+  transition: background-color 1s ease-in-out;
+}
+
+/* 背景动画 */
+
+.nav-bar {
+  background: rgba(255, 255, 255, 1) !important;
+  box-shadow: 5px 0 5px rgba(0, 0, 0, 0.3);
+}
+.nav-bar span a {
+  color: #4c4948;
+}
+
+.nav-bar .toggle-menu .hanbao div {
+  background-color: #3b3a3a !important;
+}
+
+#page-header span {
+  position: absolute;
+  display: block;
+  float: left;
+  line-height: 2.2rem;
+}
+
+#page-header .logo {
+  left: 2vw;
+}
+
+#page-header .logo a {
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 17px;
+}
+
+#page-header .menus_item {
+  right: 2vw;
+}
+
+#page-header .menus_item a {
+  font-size: 16px;
+  font-weight: 600;
+  float: left;
+  display: block;
+  padding: 0px 5px;
+  margin: 0px 10px;
+  overflow: hidden;
+}
+
+#page-header .menus_item a:nth-child(-n + 3):nth-child(n + 2) {
+  display: none;
+}
+
+#page-header .menus_item a::after {
+  content: '';
+  display: block;
+  position: relative;
+  height: 3px;
+  background-color: #94b8a4;
+  bottom: 15px;
+  left: -115%;
+  transition: left 0.5s ease-in-out;
+}
+
+/* 汉堡 */
+
+#page-header .menus_item a:hover::after {
+  left: 0%;
+}
+#page-header .toggle-menu .menus_item a::after {
+  content: '';
+  display: block;
+  position: relative;
+  height: 3px;
+  background-color: #94b8a4;
+  bottom: 10px;
+  left: -125%;
+  transition: left 0.5s ease-in-out;
+}
+
+#page-header .toggle-menu .menus_item a:hover::after {
+  left: 0%;
+}
+#page-header .toggle-menu {
+  position: relative;
+}
+
+/* 隐藏汉堡 */
+#page-header .toggle-menu .hanbao {
+  display: none;
+}
+#page-header .toggle-menu > .menus_item {
+  display: none;
+}
+
+#page-header .toggle-menu .menus_item {
+  padding-right: 20px;
+}
+#page-header .toggle-menu .menus_item i {
+  font-size: 20px;
+}
+
+#page-header .toggle-menu .hanbao {
+  float: right;
+  position: relative;
+  right: 0.8rem;
+  top: 0.7rem;
+  color: #eee;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+#page-header .toggle-menu .hanbao div {
+  position: relative;
+  top: 0px;
+  width: 18px;
+  height: 3px;
+  background-color: #eee;
+  margin: 2px 0;
+  transition: transform 0.3s ease-in-out, top 0.3s ease-in-out 0.3s,
+    opacity 0.3s ease-in-out 0.3s;
+}
+#toggle {
+  display: none;
+}
+
+#toggle:checked + label .hanbao .menu-icon-first {
+  top: 5px;
+  transform: rotate(45deg);
+  transition: top 0.3s ease-in-out, transform 0.3s ease-in-out 0.3s;
+}
+
+#toggle:checked + label .hanbao .menu-icon-second {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+#toggle:checked + label .hanbao .menu-icon-third {
+  top: -5px;
+  transform: rotate(-45deg);
+  transition: top 0.3s ease-in-out, transform 0.3s ease-in-out 0.3s;
+}
+#toggle:checked ~ .main-menu {
+  display: block !important;
+}
+
+/* 汉堡菜单 */
+.mobile-menu {
+  box-sizing: border-box;
+  width: 100vw;
+  position: relative;
+  height: 80vh;
+  background-color: #fff;
+  top: 20vh;
+  right: 0vw;
+  transform: scaleY(0);
+  transition: transform 1s ease-in-out;
+}
+.mobile-menu-anno {
+  transform: scaleY(1);
+  transition: transform 1s ease-in-out;
+}
+
+.mobile-menu .menus_item {
+  float: none !important;
+  right: unset !important;
+  position: unset !important;
+  display: flex !important;
+  justify-content: center; /* 水平居中 */
+  padding-top: 10vh;
+}
+
+.mobile-menu .menus_item a {
+  color: #4c4948;
+}
+
+.mobile-menu .menus_item a:nth-child(-n + 3):nth-child(n + 2) {
+  display: block !important;
+}
+.mobile-menu .menus_item a:nth-child(1) {
+  display: none !important;
+}
+
+/****/
+.site-info {
+  box-sizing: border-box;
+  padding-top: 45vh;
+}
+
+.site-info .site-title {
+  letter-spacing: 0.3rem;
+  font-size: 2rem;
+  color: #eee;
+  text-align: center;
+  text-shadow: 0.1rem 0.1rem 0.2rem rgba(0, 0, 0, 0.15);
+  line-height: 1.5;
+}
+
+.site-info .site-sub {
+  font-size: 1.2rem;
+  color: #eee;
+  text-align: center;
+  text-shadow: 0.1rem 0.1rem 0.2rem rgba(0, 0, 0, 0.15);
+  line-height: 1.5;
+}
+
+.site-info #social {
+  margin: 30px auto;
+  width: 15rem;
+  text-align: center;
+  display: none;
+  font-size: 1.2rem;
+}
+.site-info #social i {
+  color: #eee;
+  font-size: 1.2rem;
+}
+
+nav .scroll-down {
+  cursor: pointer;
+  height: 42px;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+nav .scroll-down a {
+  animation: scroll-down 3s infinite;
+}
+
+/* scroll-down动画 */
+@keyframes scroll-down {
+  50% {
+    color: rgba(18, 236, 116, 0.3);
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* ityped */
+.ityped-cursor {
+  font-size: 1.2rem;
+  opacity: 1;
+  -webkit-animation: blink 0.3s infinite;
+  -moz-animation: blink 0.3s infinite;
+  animation: blink 0.3s infinite;
+  animation-direction: alternate;
+}
+
+@keyframes blink {
+  100% {
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes blink {
+  100% {
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes blink {
+  100% {
+    opacity: 0;
+  }
+}

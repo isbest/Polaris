@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.henu.repository.UserRepository">
+
+    <select id="findAll" resultType="User">
+        select * from user;
+    </select>
+    <select id="findById" parameterType="int" resultType="User">
+      select * from user where id = #id;
+    </select>
+    <insert id="insertUser" parameterType="User" >
+        insert into user(username,password,registerDate,email,sex,birthdayDate) values (#{userName},#{password},#{registerDate},#{email},#{sex},#{birthdayDate})
+    </insert>
+    <select id="findByName" parameterType="String" resultType="User">
+        select * from user where username = #{username};
+    </select>
+    <select id="findByEmail" parameterType="String" resultType="User">
+        select * from user where email = #{email};
+    </select>
+</mapper>

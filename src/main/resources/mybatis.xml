@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!-- 打印SQL-->
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+        <!-- 开启延迟加载 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+    </settings>
+    <typeAliases>
+        <!--指定包名，MyBatis会在该包名下搜索JavaBeen-->
+        <package name="com.henu.entity" />
+    </typeAliases>
+</configuration>

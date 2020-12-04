@@ -1,0 +1,38 @@
+@media screen and (max-width: 960px) {
+  /* 隐藏侧边栏 */
+
+  .aside_content {
+    display: none;
+  }
+  .recent-post {
+    width: 100%;
+  }
+  .site-info #social {
+    display: block;
+  }
+  .recent-post-item {
+    height: auto !important;
+  }
+  .recent-post-item .post-item-left {
+    width: 100% !important;
+    height: 230px !important;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .recent-post-item .post-item-info {
+    padding: 15px 15px 10px;
+    width: 100%;
+  }
+
+  /* 顶栏汉堡按钮 */
+  #page-header .toggle-menu .hanbao {
+    display: block;
+  }
+  #page-header .toggle-menu > .menus_item {
+    display: block;
+  }
+  #page-header .main-menu {
+    display: none;
+  }
+}
