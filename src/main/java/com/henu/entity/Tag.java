@@ -5,8 +5,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class Tags {
-    private int id;
-    private int articleId;
+public class Tag {
+    private Integer id;
+    private Integer articleId;
     private String tag;
 }

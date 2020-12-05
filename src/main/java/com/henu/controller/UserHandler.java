@@ -2,11 +2,9 @@ package com.henu.controller;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
-import com.alibaba.fastjson.support.spring.annotation.ResponseJSONP;
 import com.henu.code.Code;
 import com.henu.entity.User;
 import com.henu.service.UserService;
-import org.apache.taglibs.standard.extra.spath.Step;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -69,6 +67,7 @@ public class UserHandler {
         user.setRegisterDate(new Date());
         int register = userService.register(user);
         result.put("result",register);
+        System.out.println(user.getBirthdayDate());
         return result;
     }
 

@@ -11,6 +11,6 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 public class FileInfo {
-    private List<String> errFiles;
-    private Map<String,String> map;
+    private String[] errFiles;
+    private Map<String,String> succMap;
 }

@@ -4,7 +4,6 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Ephemera</title>
-    <!-- <link rel="stylesheet" href="//at.alicdn.com/t/font_1967122_c5qpct7q4mf.css"> -->
     <link rel="stylesheet" href="css/font.css"/>
     <link rel="stylesheet" href="css/page-header.css"/>
     <link rel="stylesheet" href="css/page-cotent.css"/>
@@ -12,12 +11,23 @@
     <link rel="stylesheet" href="css/responsive.css"/>
     <link rel="stylesheet" href="css/aside.css"/>
 
-    <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/vditor/dist/index.css"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/vditor/dist/index.min.js"></script>
+    <!-- vditor编辑器 -->
+    <link rel="stylesheet" href="vditor/index.css"/>
+    <script src="vditor/index.min.js"></script>
+    <!--jq-->
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="js/edit.js"></script>
+    <!--tagInput-->
+    <link rel="stylesheet" href="js/buefy.min.css"/>
+    <link rel="stylesheet" href="css/all.css"/>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="js/buefy.min.js"></script>
+
+    <style>
+        #app section {
+            padding: 10px;
+        }
+    </style>
 </head>
 
 <body>
@@ -56,71 +66,36 @@
 </nav>
 
 <div class="content-outer">
-    <div class="content-inner">
-        <div class="recent-post" style="width: 100%; margin: 20px">
+    <div class="content-inner" style="max-width:1500px">
+        <div class="recent-post" style="width: 70% ;margin-top: 20px">
             <div id="vditor" class="vditor"></div>
         </div>
-        <div class="aside_content">
-            <div class="card-widget card-announcement">
+        <div class="aside_content" style="width: 30%">
+            <div class="card-widget card-announcement" style="overflow: inherit">
                 <div class="card-content">
                     <div class="card-anno-conten">
-                        <form action="#" method="post">
-                            <label for="atricleTitle">
-                                文章标题
-                                <input type="text" id="atricleTitle" name="articleTitle"/>
-                            </label>
-                        </form>
-                        <button
-                                onclick="getV()"
-                                value="获取内容"
-                                style="width: 100px; height: 50px"
-                        ></button>
+                        <div id="app">
+                            <template>
+                                <section>
+                                    <b-field label="title">
+                                        <b-input v-model="name"></b-input>
+                                    </b-field>
+                                </section>
+                                <section>
+                                    <b-field label="your tags">
+                                        <b-taginput v-model="vTags" type="is-warning"></b-taginput>
+                                    </b-field>
+                                </section>
+                                <section>
+                                    <b-button type="is-primary" expanded @click="send">提交</b-button>
+                                </section>
+                            </template>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-
-<!-- vditor编辑器 -->
-<script>
-    const vditor = new Vditor('vditor', {
-        minHeight: 800,
-        width: '100%',
-        theme: 'classic',
-        cache: {
-            enable: false,
-        },
-        preview: {
-            theme: {
-                current: 'light',
-            },
-        },
-        icon: 'material',
-        upload: {
-            accept: "image/*",
-            url: '/article/fileupload',
-            filename(name) {
-                return name.replace(/[^(a-zA-Z0-9\u4e00-\u9fa5\.)]/g);
-            },
-            linkToImgCallback() {
-                console.log("api处理");
-            },
-            success(editor, msg) {
-                console.log(msg);
-                console.log(JSON.parse(msg));
-            },
-            error(msg) {
-                console.log(msg + "上传失败了");
-            }
-        },
-    });
-
-    getV = function () {
-        alert(vditor.getValue() + '\n' + vditor.getHTML());
-        console.log(vditor.html2md(vditor.getHTML()));
-    };
-</script>
 </body>
 </html>

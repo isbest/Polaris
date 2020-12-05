@@ -18,6 +18,7 @@ public class User implements Serializable {
     private String email;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthdayDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date registerDate;
     private String checkCode;
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.henu.repository.ArticleRepository">
+
+    <select id="findNextArticleId" resultType="int" >
+        select auto_increment from information_schema.`TABLES` WHERE TABLE_SCHEMA='ssm' AND TABLE_NAME='article'
+    </select>
+
+    <insert id="addArticle" parameterType="Article">
+        insert into article(authorId, title, releaseDate, modifyDate, content, likes, views)
+        values (#{authorId}, #{title}, #{releaseDate}, #{modifyDate}, #{content}, #{likes}, #{views})
+    </insert>
+
+    <select id="findAll" resultType="Article">
+        select * from article
+    </select>
+
+    <select id="findByTag" parameterType="Tag" resultType="Article">
+        select * from article as a,tags as t where t.articleId = a.id and t.tag = #{tag}
+    </select>
+
+</mapper>

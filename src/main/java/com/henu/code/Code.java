@@ -12,4 +12,9 @@ public class Code {
     public static final int USER_LOGIN_SUCCESS = 26; //登录成功
     public static final int LOGIN_ERROR = 27; //登录失败
     public static final int PASSWORD_ERROR = 28; //登录失败
+
+    public static final int NO_USER_LOGIN = 29; //用户未登录
+    public static final int ARTICLE_ERROR = 30; //文章存数据库出错
+    public static final int TAGS_ERROR = 31; //标签存数据库出错
+    public static final int ADD_ARTICLE_SUCCESS = 32; //标签存数据库出错
 }
