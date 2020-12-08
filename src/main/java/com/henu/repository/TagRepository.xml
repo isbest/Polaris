@@ -4,4 +4,7 @@
     <insert id="putTagFromArticle" parameterType="Tag">
         insert into tags(articleId, tag) values(#{articleId},#{tag})
     </insert>
+    <select id="getArticleTagsById" resultType="Tag" parameterType="int">
+        select * from tags where articleId = #{id}
+    </select>
 </mapper>

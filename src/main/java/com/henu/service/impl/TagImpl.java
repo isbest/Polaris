@@ -27,4 +27,10 @@ public class TagImpl implements TagService {
         }
         return false;
     }
+
+    @Override
+    public List<Tag> getArticleTagsById(int id) {
+        List<Tag> articleTagsById = tagRepository.getArticleTagsById(id);
+        return articleTagsById;
+    }
 }

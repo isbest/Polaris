@@ -74,7 +74,7 @@ public class ArticleHandler {
         HashMap<String, Object> res = new HashMap<>();
         FileInfo fileInfo = new FileInfo(errFiles == null ? new String[]{} : errFiles.toArray(new String[]{}), succMap);
         res.put("code", code);
-        res.put("msg",msg);
+        res.put("msg", msg);
         res.put("data", fileInfo);
 
         System.out.println(res.toString());
@@ -84,21 +84,21 @@ public class ArticleHandler {
 
     @PostMapping("/add")
     @ResponseBody
-    public Map<String,Object> addArticle( @RequestBody Article article, HttpServletRequest request){
+    public Map<String, Object> addArticle(@RequestBody Article article, HttpServletRequest request) {
 
         System.out.println(article.getReleaseDate());
 
-        Map<String,Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         User user = (User) request.getSession().getAttribute("user");
-        if(user == null) {
+        if (user == null) {
             map.put("msg", Code.NO_USER_LOGIN);
             return map;
         }
         //设置用户id
         article.setAuthorId(user.getId());
         int i = articleService.addArticle((Article) article);
-        if(i == 0) {
-            map.put("msg",Code.ARTICLE_ERROR);
+        if (i == 0) {
+            map.put("msg", Code.ARTICLE_ERROR);
             return map;
         }
 
@@ -110,13 +110,27 @@ public class ArticleHandler {
         }
 
         boolean putTagFlag = tagService.putTagFromArticle(tags);
-        if(!putTagFlag) {
-            map.put("msg",Code.TAGS_ERROR);
+        if (!putTagFlag) {
+            map.put("msg", Code.TAGS_ERROR);
             return map;
         }
 
-        map.put("msg",Code.ADD_ARTICLE_SUCCESS);
+        map.put("msg", Code.ADD_ARTICLE_SUCCESS);
         return map;
     }
 
+    @GetMapping("/{id}")
+    @ResponseBody
+    @CrossOrigin(origins = "*")
+    public Article getArticleById(@PathVariable String id) {
+        Article articleById = articleService.findArticleById(Integer.parseInt(id));
+        return articleById;
+    }
+
+    @PostMapping("/getArticles")
+    @ResponseBody
+    public List<Article> getArticles(){
+        List<Article> all = articleService.findAll();
+        return all;
+    }
 }

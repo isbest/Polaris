@@ -15,6 +15,10 @@
         select * from article
     </select>
 
+    <select id="findArticleById" parameterType="int" resultType="Article">
+        select * from article where id = #{id}
+    </select>
+
     <select id="findByTag" parameterType="Tag" resultType="Article">
         select * from article as a,tags as t where t.articleId = a.id and t.tag = #{tag}
     </select>

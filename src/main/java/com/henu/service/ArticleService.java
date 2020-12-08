@@ -8,6 +8,7 @@ import java.util.List;
 public interface ArticleService {
     int findNextArticleId();
     List<Article> findAll();
+    Article findArticleById(int id);
     List<Article> findByTag(Tag tag);
     int addArticle(Article article);
     int delArticle(Article article);

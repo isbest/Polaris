@@ -163,7 +163,8 @@ $(function () {
                     data.id = "";
                     data.authorId = "";
                     data.title = this.name;
-                    data.content = vditor.getHTML();
+                    data.content = vditor.getValue();
+                    console.log(vditor.getValue());
                     data.releaseDate = this.getNowDate();
                     data.modifyDate = this.getNowDate();
                     data.like = 0;
