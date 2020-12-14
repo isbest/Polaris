@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -64,5 +66,28 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public int delArticle(Article article) {
         return 0;
+    }
+
+    //分页查询
+    @Override
+    @Transactional
+    public List<Article> findArticleByPage(int offset, int pageSize) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("offset",offset);
+        params.put("pageSize",pageSize);
+        List<Article> articleByPage = articleRepository.findArticleByPage(params);
+        for (Article article :
+                articleByPage) {
+            List<Tag> articleTagsById = tagRepository.getArticleTagsById(article.getId());
+            article.setTags(articleTagsById);
+        }
+
+        return articleByPage;
+    }
+
+    //最近2天的文章
+    @Override
+    public List<Article> getRecentlyArticle(int n) {
+        return articleRepository.getRecentlyArticle(n);
     }
 }

@@ -23,4 +23,16 @@
         select * from article as a,tags as t where t.articleId = a.id and t.tag = #{tag}
     </select>
 
+    <!--分页查询-->
+    <select id="findArticleByPage" resultType="Article">
+        select * from article limit #{offset},#{pageSize}
+    </select>
+
+    <!--最近n天的文章-->
+    <select id="getRecentlyArticle" resultType="Article">
+        SELECT *
+        FROM article
+        where DATE_SUB(CURDATE(), INTERVAL #{n} DAY) &lt;= date(releaseDate);
+    </select>
+
 </mapper>

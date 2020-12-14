@@ -22,23 +22,19 @@ import java.util.*;
 @Controller
 @RequestMapping("/article")
 public class ArticleHandler {
+    private static final int pageSize = 5;
 
     @Autowired
     private ArticleService articleService;
     @Autowired
     private TagService tagService;
 
+    //对接vditor的文件上传
     @ResponseBody
     @PostMapping("/fileupload")
     public Map<String, Object> fileUpLoad(HttpServletRequest request) {
         MultipartRequest multipartRequest = (MultipartRequest) request;
         List<MultipartFile> files = multipartRequest.getFiles("file[]"); //获取上传的文件对象
-
-        for (MultipartFile multipartFile :
-                files) {
-            System.out.println(multipartFile.getOriginalFilename());
-        }
-
 
         //获取保存文件的路径
         String path = request.getSession().getServletContext().getRealPath("/upload");
@@ -66,7 +62,7 @@ public class ArticleHandler {
             if (succMap == null) {
                 succMap = new HashMap<>();
             }
-            succMap.put(fileName, "/upload/" + fileName);
+            succMap.put(fileName, "http://localhost:8080/upload/" + fileName);
             System.out.println(succMap.toString());
         }
 
@@ -81,7 +77,7 @@ public class ArticleHandler {
         return res;
     }
 
-
+    //发布新文章
     @PostMapping("/add")
     @ResponseBody
     public Map<String, Object> addArticle(@RequestBody Article article, HttpServletRequest request) {
@@ -119,7 +115,8 @@ public class ArticleHandler {
         return map;
     }
 
-    @GetMapping("/{id}")
+    //文章详细信息,API
+    @GetMapping("/api/{id}")
     @ResponseBody
     @CrossOrigin(origins = "*")
     public Article getArticleById(@PathVariable String id) {
@@ -127,10 +124,33 @@ public class ArticleHandler {
         return articleById;
     }
 
-    @PostMapping("/getArticles")
+    @RequestMapping("/id")
+    public String toArticle(int id){
+       return "article";
+    }
+
+    //所有文章，测试用
+    @PostMapping("/api/getArticles")
     @ResponseBody
     public List<Article> getArticles(){
         List<Article> all = articleService.findAll();
         return all;
+    }
+
+    //最近文章
+    @ResponseBody
+    @RequestMapping("/api/recent/{n}")
+    public List<Article> getRecentlyArticle(@PathVariable String n) {
+        List<Article> recentlyArticle = articleService.getRecentlyArticle(Integer.parseInt(n));
+        return recentlyArticle;
+    }
+
+    //文章分页
+    @GetMapping("/page/{pageNum}")
+    @ResponseBody
+    @CrossOrigin(origins = "*")
+    public List<Article> getArticleByPage(@PathVariable String pageNum){
+        List<Article> articleByPage = articleService.findArticleByPage(Integer.parseInt(pageNum)*pageSize, pageSize);
+        return articleByPage;
     }
 }
