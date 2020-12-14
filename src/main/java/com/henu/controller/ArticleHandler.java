@@ -142,7 +142,7 @@ public class ArticleHandler {
     @RequestMapping("/api/recent/{n}")
     public List<Article> getRecentlyArticle(@PathVariable String n) {
         List<Article> recentlyArticle = articleService.getRecentlyArticle(Integer.parseInt(n));
-        return recentlyArticle;
+        return   recentlyArticle;
     }
 
     //文章分页
