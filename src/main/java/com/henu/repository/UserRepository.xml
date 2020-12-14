@@ -9,7 +9,7 @@
     <select id="findById" parameterType="int" resultType="User">
         select *
         from user
-        where id = #id;
+        where id = #{id};
     </select>
     <insert id="insertUser" parameterType="User">
         insert into user(username, password, registerDate, email, sex, birthdayDate)

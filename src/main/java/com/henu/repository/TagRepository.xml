@@ -7,4 +7,7 @@
     <select id="getArticleTagsById" resultType="Tag" parameterType="int">
         select * from tags where articleId = #{id}
     </select>
+    <select id="getAllTags" resultType="Tag">
+        select * from tags
+    </select>
 </mapper>

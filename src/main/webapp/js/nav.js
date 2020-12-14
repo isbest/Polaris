@@ -5,9 +5,10 @@ let goToWarp = document.getElementsByClassName('go-up-warp')[0];
 let goToMain = document.getElementsByClassName('go-to-main')[0];
 let toggle = document.getElementById('toggle');
 let mobileMenu = document.getElementsByClassName('main-menu')[0];
+let nav = document.getElementsByTagName('nav')[0];
 
 function getScrollTop() {
-  var scrollTop = 0,
+  let scrollTop = 0,
     bodyScrollTop = 0,
     documentScrollTop = 0;
   if (document.body) {
@@ -37,19 +38,18 @@ function navHide() {
 }
 
 // 判断滚轮方向
-
-var scrollFunc = function (e) {
+let scrollFunc = function (e) {
   e = e || window.event;
   if (e.wheelDelta) {
     //IE/Opera/Chrome
-    if (e.wheelDelta == 120) {
+    if (e.wheelDelta === 120) {
       navShow();
     } else {
       navHide();
     }
   } else if (e.detail) {
     //Firefox
-    if (e.detail == -3) {
+    if (e.detail === -3) {
       navHide();
     } else {
       navShow();
@@ -61,11 +61,9 @@ if (document.addEventListener) {
   document.addEventListener('DOMMouseScroll', scrollFunc, false);
 }
 window.onmousewheel = document.onmousewheel = scrollFunc;
-
 //scrolldown动画
 
 //回到顶部
-
 goToWarp.onclick = function () {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
@@ -73,9 +71,7 @@ goToWarp.onclick = function () {
 };
 
 goToMain.onclick = function () {
-  let target = window.innerHeight - 10;
-  // let step = getScrollTop();
-
+  let target = nav.getBoundingClientRect().height - 15;
   window.scrollTo(0, target);
   navShow();
 };

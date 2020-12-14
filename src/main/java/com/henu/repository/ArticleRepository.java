@@ -10,9 +10,10 @@ public interface ArticleRepository {
     int findNextArticleId();
     List<Article> findAll();
     Article findArticleById(int id);
-    List<Article> findByTag(Tag tag);
+    List<Article> findByTag(String tag);
     int addArticle(Article article);
     int delArticle(Article article);
     List<Article> findArticleByPage(Map<String,Object> params);
     List<Article> getRecentlyArticle(int id);
+    List<Article> getUserArticles(int id);
 }

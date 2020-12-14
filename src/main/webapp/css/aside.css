@@ -296,6 +296,8 @@
 }
 
 .card-tag-cloud a {
+  display: inline-block;
+  padding: .1rem;
   font-size: 16px;
   color: #999;
   text-decoration: none;

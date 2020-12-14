@@ -35,4 +35,8 @@
         where DATE_SUB(CURDATE(), INTERVAL #{n} DAY) &lt;= date(releaseDate);
     </select>
 
+    <!--获取某个用户的所有文章-->
+    <select id="getUserArticles" resultType="Article">
+        select * from article where authorId = #{id}
+    </select>
 </mapper>

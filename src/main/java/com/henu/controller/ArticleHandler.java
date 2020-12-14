@@ -23,7 +23,6 @@ import java.util.*;
 @RequestMapping("/article")
 public class ArticleHandler {
     private static final int pageSize = 5;
-
     @Autowired
     private ArticleService articleService;
     @Autowired
@@ -132,6 +131,7 @@ public class ArticleHandler {
     //所有文章，测试用
     @PostMapping("/api/getArticles")
     @ResponseBody
+    @CrossOrigin(origins = "*")
     public List<Article> getArticles(){
         List<Article> all = articleService.findAll();
         return all;
@@ -140,17 +140,26 @@ public class ArticleHandler {
     //最近文章
     @ResponseBody
     @RequestMapping("/api/recent/{n}")
+    @CrossOrigin(origins = "*")
     public List<Article> getRecentlyArticle(@PathVariable String n) {
         List<Article> recentlyArticle = articleService.getRecentlyArticle(Integer.parseInt(n));
         return   recentlyArticle;
     }
 
     //文章分页
-    @GetMapping("/page/{pageNum}")
+    @GetMapping("/api/page/{pageNum}")
     @ResponseBody
     @CrossOrigin(origins = "*")
     public List<Article> getArticleByPage(@PathVariable String pageNum){
         List<Article> articleByPage = articleService.findArticleByPage(Integer.parseInt(pageNum)*pageSize, pageSize);
         return articleByPage;
+    }
+
+    //按照标签查询
+    @RequestMapping("/api/tag/{tag}")
+    @ResponseBody
+    @CrossOrigin(origins = "*")
+    public List<Article> findArticleByTagName(@PathVariable String tag) {
+        return articleService.findByTag(tag);
     }
 }

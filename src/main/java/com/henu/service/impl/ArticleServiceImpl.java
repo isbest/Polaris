@@ -49,8 +49,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> findByTag(Tag tag) {
-        return null;
+    public List<Article> findByTag(String tag) {
+        return articleRepository.findByTag(tag);
     }
 
     @Override
@@ -90,4 +90,5 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> getRecentlyArticle(int n) {
         return articleRepository.getRecentlyArticle(n);
     }
+
 }

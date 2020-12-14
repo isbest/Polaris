@@ -2,326 +2,343 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ephemera</title>
-  <link rel="stylesheet" href="css/font.css" />
-  <link rel="stylesheet" href="css/page-header.css" />
-  <link rel="stylesheet" href="css/page-cotent.css" />
-  <link rel="stylesheet" href="css/body.css" />
-  <link rel="stylesheet" href="css/aside.css">
-  <link rel="stylesheet" href="css/footer.css">
-  <link rel="stylesheet" href="css/responsive.css">
-  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
-  <script src="js/vue.js" type="text/javascript"></script>
-  <script src="js/axios.js" type="text/javascript"></script>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Ephemera</title>
+    <link rel="stylesheet" href="css/font.css"/>
+    <link rel="stylesheet" href="css/page-header.css"/>
+    <link rel="stylesheet" href="css/page-cotent.css"/>
+    <link rel="stylesheet" href="css/body.css"/>
+    <link rel="stylesheet" href="css/aside.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script src="js/vue.js" type="text/javascript"></script>
+    <script src="js/axios.js" type="text/javascript"></script>
 </head>
 
 <body>
-  <nav>
+<nav>
     <div id="page-header">
-      <span class="logo"><a href="#">SEULG</a></span>
-      <div class="toggle-menu">
-        <span class="menus_item">
-          <a href="#"><i class="iconfont icon-search"></i></a>
-        </span>
-        <input type="checkbox" id="toggle">
-        <label for="toggle">
-          <div class="hanbao">
-            <div class="menu-icon-first"></div>
-            <div class="menu-icon-second"></div>
-            <div class="menu-icon-third"></div>
-          </div>
-        </label>
-
-        <!--顶栏导航-->
-        <div class="main-menu">
-          <span class="menus_item">
-            <a href="#"><i class="iconfont icon-search"></i>搜索</a>
-            <a href="#"><i class="iconfont icon-biaoqian"></i>标签</a>
-            <a href="#"><i class="iconfont icon-htmal5icon06"></i>主页</a>
-            <a href="#"><i class="iconfont icon-youlian"></i>友链</a>
-            <a href="#"><i class="iconfont icon-liuyan"></i>留言</a>
-            <a href="./edit.html"><i class="iconfont icon-bianji"></i>编辑</a>
-            <a href="./register.html"><i class="iconfont icon-guanyuwomen"></i>登陆</a>
-          </span>
+        <span class="logo"><a href="#">SEULG</a></span>
+        <div class="toggle-menu">
+            <span class="menus_item">
+              <a href="#"><i class="iconfont icon-search"></i></a>
+            </span>
+            <!--汉堡按钮，响应式-->
+            <input type="checkbox" id="toggle">
+            <label for="toggle">
+                <div class="hanbao">
+                    <div class="menu-icon-first"></div>
+                    <div class="menu-icon-second"></div>
+                    <div class="menu-icon-third"></div>
+                </div>
+            </label>
+            <!--顶栏导航-->
+            <div class="main-menu">
+              <span class="menus_item">
+                <a href="#"><i class="iconfont icon-search"></i>搜索</a>
+                <a href="#"><i class="iconfont icon-biaoqian"></i>标签</a>
+                <a href="#"><i class="iconfont icon-htmal5icon06"></i>主页</a>
+                <a href="#"><i class="iconfont icon-youlian"></i>友链</a>
+                <a href="#"><i class="iconfont icon-liuyan"></i>留言</a>
+                <a href="./edit.html"><i class="iconfont icon-bianji"></i>编辑</a>
+                <a href="./register.html"><i class="iconfont icon-guanyuwomen"></i>登陆</a>
+              </span>
+            </div>
         </div>
-      </div>
     </div>
 
     <!--友链接-->
     <div class="site-info">
-      <div class="site-title">
-        <span class="blog-title">SEULG</span>
-      </div>
-      <div class="site-sub">
-        <span id="ityped" class="ityped"></span>
-      </div>
+        <div class="site-title">
+            <span class="blog-title">SEULG</span>
+        </div>
+        <div class="site-sub">
+            <span id="ityped" class="ityped"></span>
+        </div>
 
-      <div id="social" class="aside-social">
-        <a href="" class="social-icon post-data-item">
-          <i class="iconfont icon-huaban88">
-          </i>
-        </a>
-        <a href="" class="social-icon post-data-item">
-          <i class="iconfont icon-QQ">
-          </i>
-        </a>
-        <a href="" class="social-icon post-data-item">
-          <i class="iconfont icon-telegram">
-          </i>
-        </a>
-        <a href="" class="social-icon post-data-item">
-          <i class="iconfont icon-csdn1-copy">
-          </i>
-        </a>
-      </div>
+        <div id="social" class="aside-social">
+            <a href="" class="social-icon post-data-item">
+                <i class="iconfont icon-huaban88">
+                </i>
+            </a>
+            <a href="" class="social-icon post-data-item">
+                <i class="iconfont icon-QQ">
+                </i>
+            </a>
+            <a href="" class="social-icon post-data-item">
+                <i class="iconfont icon-telegram">
+                </i>
+            </a>
+            <a href="" class="social-icon post-data-item">
+                <i class="iconfont icon-csdn1-copy">
+                </i>
+            </a>
+        </div>
     </div>
 
     <div class="scroll-down">
-      <a class="go-to-main"><i class="iconfont icon-xia"></i></a>
+        <a class="go-to-main"><i class="iconfont icon-xia"></i></a>
     </div>
-  </nav>
+</nav>
 
-  <div class="content-outer">
+<div class="content-outer">
     <div class="content-inner">
-      <div class="recent-post" id="summary">
-        <div v-for="(item,index) in items">
-          <div class="recent-post-item post-left"  v-if="index%2 === 0">
-            <div class="post-item-left">
-              <a :href="'http://localhost:8080/article/id?id='+item.id">
-                <img src="https://puui.qpic.cn/fans_admin/0/3_113531922_1563244548805/0"
-                     alt="post-item-info"/>
-              </a>
-            </div>
-            <div class="post-item-info">
-              <a :href="'http://localhost:8080/article/id?id='+item.id" class="article-title">
-                {{item.title}}
-              </a>
-              <span class="article-meta">
+        <div class="recent-post" id="summary">
+            <div v-for="(item,index) in items">
+                <div class="recent-post-item post-left" v-if="index%2 === 0">
+                    <div class="post-item-left">
+                        <a :href="'http://localhost:8080/article/id?id='+item.id">
+                            <img src="https://puui.qpic.cn/fans_admin/0/3_113531922_1563244548805/0"
+                                 alt="post-item-info"/>
+                        </a>
+                    </div>
+                    <div class="post-item-info">
+                        <a :href="'http://localhost:8080/article/id?id='+item.id" class="article-title">
+                            {{item.title}}
+                        </a>
+                        <span class="article-meta">
                             <i class="iconfont icon-fabushijian"></i>
                             <time>{{item.releaseDate}}</time>
                             <i class="iconfont icon-fengefu"></i>
                         </span>
-              <span class="article-meta">
+                        <span class="article-meta">
                             <i class="iconfont icon-xiugaishijian"></i>
                             <time>{{item.modifyDate}}</time>
                         </span>
-              <div class="content">
-                分享一些特殊的网站 </br>持续更新</br> 欢迎留言补充
-              </div>
-            </div>
-          </div>
-          <div class="recent-post-item post-right"  v-if="index%2 !== 0">
-            <div class="post-item-left">
-              <a :href="'http://localhost:8080/article/id?id='+item.id">
-                <img src="https://puui.qpic.cn/fans_admin/0/3_113531922_1563244548805/0"
-                                                                             alt="post-item-info"/>
-              </a>
-            </div>
-            <div class="post-item-info">
-              <a :href="'http://localhost:8080/article/id?id='+item.id" class="article-title">
-                {{item.title}}
-              </a>
-              <span class="article-meta">
+                        <div class="content">
+                            分享一些特殊的网站 </br>持续更新</br> 欢迎留言补充
+                        </div>
+                    </div>
+                </div>
+                <div class="recent-post-item post-right" v-if="index%2 !== 0">
+                    <div class="post-item-left">
+                        <a :href="'http://localhost:8080/article/id?id='+item.id">
+                            <img src="https://puui.qpic.cn/fans_admin/0/3_113531922_1563244548805/0"
+                                 alt="post-item-info"/>
+                        </a>
+                    </div>
+                    <div class="post-item-info">
+                        <a :href="'http://localhost:8080/article/id?id='+item.id" class="article-title">
+                            {{item.title}}
+                        </a>
+                        <span class="article-meta">
                             <i class="iconfont icon-fabushijian"></i>
                             <time>{{item.releaseDate}}</time>
                             <i class="iconfont icon-fengefu"></i>
                         </span>
 
 
-              <span class="article-meta">
+                        <span class="article-meta">
                             <i class="iconfont icon-xiugaishijian"></i>
                             <time>{{item.modifyDate}}</time>
                         </span>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="aside_content">
-        <!--用户信息-->
-        <div class="card-widget card-author">
-          <div class="card-content">
-            <div class="post-data">
-              <div class="post-data-item">
-                <img src="./images/avatar.png" alt="zuozhe">
-                <p class="motto">ourongxing</p>
-                <p>天生骄傲</p>
-              </div>
+        <div class="aside_content">
+            <!--用户信息-->
+            <div class="card-widget card-author" id="userInfo">
+                <div class="card-content">
+                    <div class="post-data">
+                        <div class="post-data-item">
+                            <img :src="info.avatarURL" alt="zuozhe">
+                            <p class="motto">{{userName}}</p>
+                            <p>{{info.motto}}</p>
+                        </div>
+                    </div>
+
+                    <div class="post-data">
+                        <div class="post-data-item text-center">
+                            <div class="data-link">
+                                <a href="#">
+                                    <p class="headline">文章</p>
+                                    <p class="length-num">{{articleNum}}</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="post-data-item text-center">
+                            <div class="data-link">
+                                <a href="#">
+                                    <p class="headline">标签</p>
+                                    <p class="length-num">{{tagNum}}</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="post-data text-center">
+                        <a :href="'http://localhost:8080/user/info/id?id='+info.uid" class="post-data-item" id="bookmark">
+                            来找我玩
+                        </a>
+                    </div>
+
+                    <div class="post-data">
+                        <div class="aside-social">
+                            <a v-if="info.github!=null" :href="info.github" class="social-icon post-data-item">
+                                <i class="iconfont icon-huaban88">
+                                </i>
+                            </a>
+                            <a v-if="info.qq!=null" :href="info.qq" class="social-icon post-data-item">
+                                <i class="iconfont icon-QQ">
+                                </i>
+                            </a>
+                            <a v-if="info.telegram!=null" :href="info.telegram" class="social-icon post-data-item">
+                                <i class="iconfont icon-telegram">
+                                </i>
+                            </a>
+                            <a v-if="info.csdn!=null" :href="info.csdn" class="social-icon post-data-item">
+                                <i class="iconfont icon-csdn1-copy">
+                                </i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="post-data">
-              <div class="post-data-item text-center">
-                <div class="data-link">
-                  <a href="#">
-                    <p class="headline">文章</p>
-                    <p class="length-num">10</p>
-                  </a>
+            <!--公告-->
+            <div class="card-widget card-announcement">
+                <div class="card-content">
+                    <div class="card-anno-icon">
+                        <i class="iconfont icon-gonggao"></i>
+                        <span>公告</span>
+                    </div>
+                    <div class="card-anno-conten">
+                        <span>目前博客正在搭建</span>
+                        <br>
+                        <span>预期一周</span>
+                        <br>
+                        <span>各系统停止自检</span>
+                    </div>
                 </div>
-              </div>
-              <div class="post-data-item text-center">
-                <div class="data-link">
-                  <a href="#">
-                    <p class="headline">标签</p>
-                    <p class="length-num">13</p>
-                  </a>
-                </div>
-              </div>
-              <div class="post-data-item text-center">
-                <div class="data-link">
-                  <a href="#">
-                    <p class="headline">分类</p>
-                    <p class="length-num">3</p>
-                  </a>
-                </div>
-              </div>
             </div>
-            <div class="post-data text-center">
-              <a href="#" class="post-data-item" id="bookmark">
-                来找我玩
-              </a>
+            <!--标签云-->
+            <div class="card-widget" id="tags">
+                <div class="card-content card-tags">
+                    <div class="card-anno-icon">
+                        <i class="iconfont icon-biaoqian"></i>
+                        <span>标签</span>
+                    </div>
+                    <div class="card-tag-cloud">
+                        <a v-for="item in tags" :href="`/article/api/tag/`+item">{{item}}</a>
+                    </div>
+                </div>
+            </div>
+            <!--系统信息-->
+            <div class="card-widget">
+                <div class="card-content card-webinfo">
+                    <div class="card-anno-icon">
+                        <i class="iconfont icon-qushi"></i>
+                        <span>归档</span>
+                    </div>
+                    <div class="webinfo">
+                        <div class="webinfo-item">
+                            <div class="webinfo-name">文章数目</div>
+                            <div class="webinfo-count">10</div>
+                        </div>
+                        <div class="webinfo-item">
+                            <div class="webinfo-name">运行时间</div>
+                            <div class="webinfo-count">365天</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="post-data">
-              <div class="aside-social">
-                <a href="" class="social-icon post-data-item">
-                  <i class="iconfont icon-huaban88">
-                  </i>
-                </a>
-                <a href="" class="social-icon post-data-item">
-                  <i class="iconfont icon-QQ">
-                  </i>
-                </a>
-                <a href="" class="social-icon post-data-item">
-                  <i class="iconfont icon-telegram">
-                  </i>
-                </a>
-                <a href="" class="social-icon post-data-item">
-                  <i class="iconfont icon-csdn1-copy">
-                  </i>
-                </a>
-              </div>
-            </div>
-          </div>
         </div>
-        <!--公告-->
-        <div class="card-widget card-announcement">
-          <div class="card-content">
-            <div class="card-anno-icon">
-              <i class="iconfont icon-gonggao"></i>
-              <span>公告</span>
-            </div>
-            <div class="card-anno-conten">
-              <span>目前博客正在搭建</span>
-              <br>
-              <span>预期一周</span>
-              <br>
-              <span>各系统停止自检</span>
-            </div>
-          </div>
-        </div>
-        <!--标签云-->
-        <div class="card-widget">
-          <div class="card-content card-tags">
-            <div class="card-anno-icon">
-              <i class="iconfont icon-biaoqian"></i>
-              <span>标签</span>
-            </div>
-            <div class="card-tag-cloud">
-              <a href="">java</a>
-              <a href="">mybatis</a>
-              <a href="">SpringMVC</a>
-              <a href="">Spring</a>
-              <a href="">ssm</a>
-              <a href="">java</a>
-              <a href="">mybatis</a>
-              <a href="">SpringMVC</a>
-              <a href="">Spring</a>
-              <a href="">ssm</a>
-              <a href="">IOC</a>
-              <a href="">IOC</a>
-            </div>
-          </div>
-        </div>
-        <!--系统信息-->
-        <div class="card-widget">
-          <div class="card-content card-webinfo">
-            <div class="card-anno-icon">
-              <i class="iconfont icon-qushi"></i>
-              <span>归档</span>
-            </div>
-            <div class="webinfo">
-              <div class="webinfo-item">
-                <div class="webinfo-name">文章数目</div>
-                <div class="webinfo-count">10</div>
-              </div>
-              <div class="webinfo-item">
-                <div class="webinfo-name">运行时间</div>
-                <div class="webinfo-count">365天</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
     </div>
-  </div>
+</div>
 
-  <footer>
+<footer>
     <div id="footer">
-      <div class="copyright">
-        ©2019 - 2020
-        <a href="">By Seulg</a>
-      </div>
-      <div class="framework-info">
+        <div class="copyright">
+            ©2019 - 2020
+            <a href="">By Seulg</a>
+        </div>
+        <div class="framework-info">
         <span>
           Power by
         </span>
-        <a href="">
-          Spring
-        </a>
-        <span>|</span>
-        <span>Modified by</span>
-        <a href="">Seulg</a>
-      </div>
+            <a href="">
+                Spring
+            </a>
+            <span>|</span>
+            <span>Modified by</span>
+            <a href="">Seulg</a>
+        </div>
 
     </div>
-  </footer>
+</footer>
 
-  <div class="go-up-warp">
+<div class="go-up-warp">
     <i class="iconfont icon-shang"></i>
-  </div>
+</div>
 
-  <script type="text/javascript" src="js/itype.js"></script>
-  <script type="text/javascript" src="js/nav.js"></script>
+<script type="text/javascript" src="js/itype.js"></script>
+<script type="text/javascript" src="js/nav.js"></script>
 
-  <script>
+<script>
     // 打字机效果
     ityped.init('#ityped', {
-      strings: ['天生骄傲', 'Never Give up !'],
-      startDelay: 600,
-      loop: true,
-      showCursor: true,
+        strings: ['天生骄傲', 'Never Give up !'],
+        startDelay: 600,
+        loop: true,
+        showCursor: true,
     });
 
     let summary = new Vue({
-      el: '#summary',
-      data: {
-        items: [{title: 'loading...'}],
-        url: [],
-      },
-      //获取分页数据
-      created() {
-        axios("http://localhost:8080/article/page/1").then(res => {
-          summary.items = res.data;
-          for (const item of res.data) {
-            summary.url.push(item.id);
-          }
-          console.log(summary.url);
-          console.log("数据请求完成");
-        }).catch(err => console.log(err))
-      }
+        el: '#summary',
+        data: {
+            items: [{title: 'loading...'}],
+            url: [],
+        },
+        //获取分页数据
+        created() {
+            axios("http://localhost:8080/article/api/page/1").then(res => {
+                summary.items = res.data;
+                for (const item of res.data) {
+                    summary.url.push(item.id);
+                }
+                console.log(summary.url);
+                console.log("数据请求完成");
+            }).catch(err => console.log(err))
+        }
+    });
+
+    let userInfo = new Vue({
+        el: "#userInfo",
+        data: {
+            info: {},
+            userName: 'loading',
+            articleNum: 0,
+            tagNum: 0
+        },
+        created() {
+            axios("http://localhost:8080/user/api/info/9").then(res => {
+                userInfo.userName = res.data.userName;
+                userInfo.info = res.data.userInfo;
+                userInfo.articleNum = res.data.userArticles;
+                userInfo.tagNum = res.data.tags;
+                console.log("userInfo.info 数据请求完成");
+                console.log(res.data);
+            }).catch(err => console.log(err))
+        }
     })
-  </script>
+
+    let tag = new Vue({
+        el:"#tags",
+        data:{
+            tags:[]
+        },
+        created(){
+            axios("http://localhost:8080/user/api/info/tags").then(res => {
+                tag.tags = res.data;
+                console.log("tags.tags 数据请求完成");
+                console.log(res.data);
+            }).catch(err => console.log(err))
+        }
+    })
+</script>
 </body>
 
 </html>

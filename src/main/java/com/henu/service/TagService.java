@@ -7,4 +7,5 @@ import java.util.List;
 public interface TagService {
     boolean putTagFromArticle(List<Tag> tags);
     List<Tag> getArticleTagsById(int id);
+    List<String> getAllTags();
 }
