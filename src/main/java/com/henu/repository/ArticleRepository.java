@@ -1,7 +1,6 @@
 package com.henu.repository;
 
 import com.henu.entity.Article;
-import com.henu.entity.Tag;
 
 import java.util.List;
 import java.util.Map;
@@ -13,6 +12,7 @@ public interface ArticleRepository {
     List<Article> findByTag(String tag);
     int addArticle(Article article);
     int delArticle(Article article);
+    int getArticlesNum();
     List<Article> findArticleByPage(Map<String,Object> params);
     List<Article> getRecentlyArticle(int id);
     List<Article> getUserArticles(int id);

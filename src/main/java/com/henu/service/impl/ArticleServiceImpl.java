@@ -28,6 +28,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public int getArticlesNum() {
+        return articleRepository.getArticlesNum();
+    }
+
+    @Override
     @Transactional
     public List<Article> findAll() {
         List<Article> all = articleRepository.findAll();

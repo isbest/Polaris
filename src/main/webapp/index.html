@@ -170,7 +170,8 @@
                     </div>
 
                     <div class="post-data text-center">
-                        <a :href="'http://localhost:8080/user/info/id?id='+info.uid" class="post-data-item" id="bookmark">
+                        <a :href="'http://localhost:8080/user/info/id?id='+info.uid" class="post-data-item"
+                           id="bookmark">
                             来找我玩
                         </a>
                     </div>
@@ -226,25 +227,24 @@
                 </div>
             </div>
             <!--系统信息-->
-            <div class="card-widget">
+            <div class="card-widget" id="sysInfo">
                 <div class="card-content card-webinfo">
                     <div class="card-anno-icon">
                         <i class="iconfont icon-qushi"></i>
-                        <span>归档</span>
+                        <span>系统信息</span>
                     </div>
                     <div class="webinfo">
                         <div class="webinfo-item">
                             <div class="webinfo-name">文章数目</div>
-                            <div class="webinfo-count">10</div>
+                            <div class="webinfo-count">{{articlesNum}}</div>
                         </div>
                         <div class="webinfo-item">
                             <div class="webinfo-name">运行时间</div>
-                            <div class="webinfo-count">365天</div>
+                            <div class="webinfo-count">{{runDays}}天</div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
@@ -323,21 +323,38 @@
                 console.log(res.data);
             }).catch(err => console.log(err))
         }
-    })
+    });
 
     let tag = new Vue({
-        el:"#tags",
-        data:{
-            tags:[]
+        el: "#tags",
+        data: {
+            tags: []
         },
-        created(){
+        created() {
             axios("http://localhost:8080/user/api/info/tags").then(res => {
                 tag.tags = res.data;
                 console.log("tags.tags 数据请求完成");
                 console.log(res.data);
             }).catch(err => console.log(err))
         }
-    })
+    });
+
+    let systemInfo = new Vue({
+        el: "#sysInfo",
+        data: {
+            articlesNum: 0,
+            runDays: 0
+        },
+        created() {
+            axios("http://localhost:8080/system/api/sysInfo").then(res => {
+                systemInfo.articlesNum = res.data.articlesNum;
+                systemInfo.runDays = res.data.runDays;
+                console.log("systemInfo 数据请求完成");
+                console.log(res.data);
+            }).catch(err => console.log(err))
+        }
+    });
+
 </script>
 </body>
 

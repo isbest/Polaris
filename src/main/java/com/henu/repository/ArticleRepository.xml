@@ -3,29 +3,33 @@
 <mapper namespace="com.henu.repository.ArticleRepository">
 
     <select id="findNextArticleId" resultType="int" >
-        select auto_increment from information_schema.`TABLES` WHERE TABLE_SCHEMA='ssm' AND TABLE_NAME='article'
+        select auto_increment from information_schema.`TABLES` WHERE TABLE_SCHEMA='ssm' AND TABLE_NAME='article';
+    </select>
+
+    <select id="getArticlesNum" resultType="int">
+        select count(*) from article;
     </select>
 
     <insert id="addArticle" parameterType="Article">
         insert into article(authorId, title, releaseDate, modifyDate, content, likes, views)
-        values (#{authorId}, #{title}, #{releaseDate}, #{modifyDate}, #{content}, #{likes}, #{views})
+        values (#{authorId}, #{title}, #{releaseDate}, #{modifyDate}, #{content}, #{likes}, #{views});
     </insert>
 
     <select id="findAll" resultType="Article">
-        select * from article
+        select * from article;
     </select>
 
     <select id="findArticleById" parameterType="int" resultType="Article">
-        select * from article where id = #{id}
+        select * from article where id = #{id};
     </select>
 
     <select id="findByTag" parameterType="Tag" resultType="Article">
-        select * from article as a,tags as t where t.articleId = a.id and t.tag = #{tag}
+        select * from article as a,tags as t where t.articleId = a.id and t.tag = #{tag};
     </select>
 
     <!--分页查询-->
     <select id="findArticleByPage" resultType="Article">
-        select * from article limit #{offset},#{pageSize}
+        select * from article limit #{offset},#{pageSize};
     </select>
 
     <!--最近n天的文章-->
@@ -37,6 +41,6 @@
 
     <!--获取某个用户的所有文章-->
     <select id="getUserArticles" resultType="Article">
-        select * from article where authorId = #{id}
+        select * from article where authorId = #{id};
     </select>
 </mapper>

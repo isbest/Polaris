@@ -31,6 +31,7 @@ public class ArticleHandler {
     //对接vditor的文件上传
     @ResponseBody
     @PostMapping("/fileupload")
+    @CrossOrigin(origins = "*")
     public Map<String, Object> fileUpLoad(HttpServletRequest request) {
         MultipartRequest multipartRequest = (MultipartRequest) request;
         List<MultipartFile> files = multipartRequest.getFiles("file[]"); //获取上传的文件对象
@@ -80,9 +81,6 @@ public class ArticleHandler {
     @PostMapping("/add")
     @ResponseBody
     public Map<String, Object> addArticle(@RequestBody Article article, HttpServletRequest request) {
-
-        System.out.println(article.getReleaseDate());
-
         Map<String, Object> map = new HashMap<>();
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
@@ -162,4 +160,5 @@ public class ArticleHandler {
     public List<Article> findArticleByTagName(@PathVariable String tag) {
         return articleService.findByTag(tag);
     }
+
 }

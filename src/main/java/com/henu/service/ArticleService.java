@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface ArticleService {
     int findNextArticleId();
+    int getArticlesNum();
     List<Article> findAll();
     Article findArticleById(int id);
     List<Article> findByTag(String tag);
