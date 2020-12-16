@@ -151,7 +151,9 @@ li {
     border: none;
     position: absolute;
 }
-
+.comment-edit-box {
+    position: relative;
+}
 .comment-edit-btn {
     right: 30px;
     bottom: 20px;

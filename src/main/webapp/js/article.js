@@ -171,7 +171,9 @@ const commentBox = {
                 </div>
             </div>
              <!--这里的id填写文章id+评论id-->
-            <comment-edit ref="subComEdit" :cid="item.id" :isclose="false" v-if="isOpen" @close="closeEdit"></comment-edit>
+             <div class="comment-edit-box">
+                <comment-edit ref="subComEdit" :cid="item.id" :isclose="false" v-if="isOpen" @close="closeEdit"></comment-edit>
+             </div>
             <div class="sub-com" v-if="item.childCom!==undefined && item.childCom.length>0">
                <comment-box :comments="item.childCom" ></comment-box>
             </div>
