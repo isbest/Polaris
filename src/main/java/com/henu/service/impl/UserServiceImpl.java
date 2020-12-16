@@ -10,7 +10,7 @@ import com.henu.repository.TagRepository;
 import com.henu.repository.UserInfoRepository;
 import com.henu.repository.UserRepository;
 import com.henu.service.UserService;
-import com.henu.utils.ArticleUtils;
+import com.henu.utils.BlogUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -126,7 +126,7 @@ public class UserServiceImpl implements UserService {
         }
 
         map.put("userArticles", userArticles.size());
-        List<String> tags = ArticleUtils.getArticlesTags(userArticles);
+        List<String> tags = BlogUtils.getArticlesTags(userArticles);
         if (tags != null) {
             map.put("tags", tags.size());
         }

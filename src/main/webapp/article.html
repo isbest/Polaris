@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/css/font.css">
     <link rel="stylesheet" href="/css/article.css">
     <link rel="stylesheet" href="/vditor/index.css"/>
+    <link rel="stylesheet" href="/css/comment.css"/>
     <script src="/vditor/index.min.js" type="text/javascript"></script>
     <script src="/js/vue.js" type="text/javascript"></script>
     <script src="/js/axios.js" type="text/javascript"></script>
@@ -19,34 +20,33 @@
     <div class="auto-open" id="sidebar">
         <div class="sidebar-dec">
             <div class="sidebar-dec-title">目录</div>
-            <div id="outline"></div>
+            <div ref="outline"></div>
         </div>
     </div>
     <div id="content-outer">
-        <div id="top-container" style="background-image: url(/images/aboutbg.png)">
+        <div id="top-container" style="background-image: url(images/aboutbg.png)">
             <div id="page-header">
-
+                阅读量
             </div>
         </div>
         <div id="content-inner" class="layout">
-            <div id="article-body"></div>
+            <div ref="art"></div>
             <hr>
             <div id="post-comment">
                 <div id="comment-head">
                     <i class="iconfont icon-liuyan"></i>
                     <span>评论</span>
                 </div>
-                <div id="comment-edit">
-                </div>
-                <button id="submit-comment">回复</button>
+                <!--这个cid要填写文章id-->
+                <comment-edit ref="comEdit" :cid="cid" :isclose="true"></comment-edit>
             </div>
             <hr>
-            <div id="comment-list">
-                这里是评论们
-            </div>
+            <comment-box ref="comBox" :comments="comments"></comment-box>
         </div>
     </div>
 </div>
 <script src="/js/article.js"></script>
 </body>
 </html>
+<script>
+</script>

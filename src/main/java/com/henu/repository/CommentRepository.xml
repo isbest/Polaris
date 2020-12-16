@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.henu.repository.CommentRepository">
+    <resultMap id="commentTree" type="Comment">
+        <id column="id" property="id" javaType="int"/>
+        <result column="cid" property="cid" javaType="int"/>
+        <result column="aid" property="aid" javaType="int"/>
+        <result column="userId" property="userId" javaType="int"/>
+        <result column="date" property="date" javaType="Date"/>
+        <result column="content" property="content" javaType="String"/>
+        <result column="likes" property="likes" javaType="int"/>
+        <collection column="id" property="childCom" javaType="java.util.ArrayList" ofType="Comment" select="getChild"/>
+    </resultMap>
 
+    <select id="getCommentTree" resultMap="commentTree">
+        select * from comment where aid = #{aid} and cid IS NULL;
+    </select>
+
+    <select id="getChild" resultMap="commentTree">
+        select * from comment where cid = #{id};
+    </select>
 </mapper>

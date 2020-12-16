@@ -144,36 +144,10 @@ hr {
     padding: 5px 10px 5px 10px;
 }
 #comment-head i {
-
     font-size: 20px;
     font-weight: 700;
 }
 
 #post-comment {
     position: relative;
-}
-
-
-#submit-comment {
-    font-size: .7rem;
-    padding: .3rem 1rem;
-    background-color: #66997d;
-    color: #fff;
-    transition-duration: .4s;
-    text-align: center;
-    border-radius: .3em;
-    display: inline-block;
-    margin-bottom: 0;
-    font-weight: 400;
-    vertical-align: middle;
-    cursor: pointer;
-    white-space: nowrap;
-    line-height: 1.42857143;
-    user-select: none;
-    outline: 0;
-    text-transform: none;
-    border: none;
-    position: absolute;
-    right: 30px;
-    bottom: 20px;
 }
