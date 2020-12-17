@@ -10,7 +10,6 @@ const pagination = {
     props: ["pagelist", "current"],
     methods: {
         gotopage(index) {
-            console.log(index);
             return this.$emit("gotopage", index)
         }
     }
