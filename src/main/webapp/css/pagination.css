@@ -1,0 +1,36 @@
+.pagination {
+    position: relative;
+    overflow: hidden;
+    margin-top: 1rem;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+}
+
+.pagination .pagination-inner {
+    text-align: center;
+}
+
+.pagination a {
+    color: #99a9bf;
+    text-decoration: none;
+    word-wrap: break-word;
+    transition: all 0.2s;
+    overflow-wrap: break-word;
+}
+
+.pagination .page-number {
+    display: inline-block;
+    margin: 0 0.2rem;
+    min-width: 1.2rem;
+    height: 1.2rem;
+    text-align: center;
+    line-height: 1.2rem;
+    cursor: pointer;
+}
+
+.pagination .pagination-inner .current {
+    background: #ff7242;
+    color: #fff;
+    cursor: default;
+}

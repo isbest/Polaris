@@ -38,10 +38,10 @@
                     <span>评论</span>
                 </div>
                 <!--这个cid要填写文章id-->
-                <comment-edit ref="comEdit" :cid="cid" :isclose="true" :aid="aid"></comment-edit>
+                <comment-edit ref="comEdit" :cid="cid" :isclose="true" :aid="aid" @refresh="refresh"></comment-edit>
             </div>
             <hr>
-            <comment-box ref="comBox" :comments="comments"></comment-box>
+            <comment-box ref="comBox" :comments="comments" @refresh="refresh"></comment-box>
         </div>
     </div>
 </div>

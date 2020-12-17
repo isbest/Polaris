@@ -245,7 +245,6 @@ const commentBox = {
             return this.$emit("refresh");
         },
         addLike(id) {
-            console.log(id);
             $.ajax({
                 type: 'post',
                 //传json不加header会报415错误
@@ -253,6 +252,7 @@ const commentBox = {
                 url: "http://localhost:8080/comment/api/like/add/"+id,
                 dataType: "json",
                 success: (data) => {
+                    console.log("点赞成功");
                     this.refresh();
                 },
                 error(msg) {

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/aside.css">
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/pagination.css">
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
     <script src="js/vue.js" type="text/javascript"></script>
     <script src="js/axios.js" type="text/javascript"></script>
@@ -136,6 +137,9 @@
                         </span>
                     </div>
                 </div>
+            </div>
+            <div ref="pagination">
+                <pagination :pagelist="pagelist" :current="current" @gotopage="gotopage"></pagination>
             </div>
         </div>
         <div class="aside_content">
@@ -285,77 +289,8 @@
         loop: true,
         showCursor: true,
     });
-
-    let summary = new Vue({
-        el: '#summary',
-        data: {
-            items: [{title: 'loading...'}],
-            url: [],
-        },
-        //获取分页数据
-        created() {
-            axios("http://localhost:8080/article/api/page/1").then(res => {
-                summary.items = res.data;
-                for (const item of res.data) {
-                    summary.url.push(item.id);
-                }
-                console.log(summary.url);
-                console.log("数据请求完成");
-            }).catch(err => console.log(err))
-        }
-    });
-
-    let userInfo = new Vue({
-        el: "#userInfo",
-        data: {
-            info: {},
-            userName: 'loading',
-            articleNum: 0,
-            tagNum: 0
-        },
-        created() {
-            axios("http://localhost:8080/user/api/info/9").then(res => {
-                userInfo.userName = res.data.userName;
-                userInfo.info = res.data.userInfo;
-                userInfo.articleNum = res.data.userArticles;
-                userInfo.tagNum = res.data.tags;
-                console.log("userInfo.info 数据请求完成");
-                console.log(res.data);
-            }).catch(err => console.log(err))
-        }
-    });
-
-    let tag = new Vue({
-        el: "#tags",
-        data: {
-            tags: []
-        },
-        created() {
-            axios("http://localhost:8080/user/api/info/tags").then(res => {
-                tag.tags = res.data;
-                console.log("tags.tags 数据请求完成");
-                console.log(res.data);
-            }).catch(err => console.log(err))
-        }
-    });
-
-    let systemInfo = new Vue({
-        el: "#sysInfo",
-        data: {
-            articlesNum: 0,
-            runDays: 0
-        },
-        created() {
-            axios("http://localhost:8080/system/api/sysInfo").then(res => {
-                systemInfo.articlesNum = res.data.articlesNum;
-                systemInfo.runDays = res.data.runDays;
-                console.log("systemInfo 数据请求完成");
-                console.log(res.data);
-            }).catch(err => console.log(err))
-        }
-    });
-
 </script>
+<script src="js/page.js" type="text/javascript"></script>
 </body>
 
 </html>
