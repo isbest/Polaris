@@ -5,6 +5,4 @@
     <select id="getUserInfoById" resultType="UserInfo">
         select * from userInfo where uid = #{id};
     </select>
-
-
 </mapper>

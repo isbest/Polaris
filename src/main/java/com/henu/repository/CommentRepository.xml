@@ -5,18 +5,67 @@
         <id column="id" property="id" javaType="int"/>
         <result column="cid" property="cid" javaType="int"/>
         <result column="aid" property="aid" javaType="int"/>
-        <result column="userId" property="userId" javaType="int"/>
+        <result column="uid" property="user.id" javaType="int"/>
+        <result column="username" property="user.userName" javaType="String"/>
+        <result column="email" property="user.email" javaType="String"/>
         <result column="date" property="date" javaType="Date"/>
         <result column="content" property="content" javaType="String"/>
         <result column="likes" property="likes" javaType="int"/>
-        <collection column="id" property="childCom" javaType="java.util.ArrayList" ofType="Comment" select="getChild"/>
+        <collection column="id" property="childCom" javaType="java.util.ArrayList" ofType="Comment"
+                    select="getChild"/>
     </resultMap>
 
     <select id="getCommentTree" resultMap="commentTree">
-        select * from comment where aid = #{aid} and cid IS NULL;
+        select c.id       as id,
+               c.cid      as cid,
+               c.aid      as aid,
+               u.id       as uid,
+               u.username as username,
+               u.email    as email,
+               c.date     as date,
+               c.content  as content,
+               c.likes    as likes
+        from comment c,
+             user u
+        where c.aid = #{aid}
+          and c.cid IS NULL
+          and c.userId = u.id
     </select>
 
     <select id="getChild" resultMap="commentTree">
-        select * from comment where cid = #{id};
+        select c.id       as id,
+               c.cid      as cid,
+               c.aid      as aid,
+               u.id       as uid,
+               u.username as username,
+               u.email    as email,
+               c.date     as date,
+               c.content  as content,
+               c.likes    as likes
+        from comment c,
+             user u
+        where c.cid = #{id}
+          and c.userId = u.id
     </select>
+
+    <insert id="addComment">
+        insert into comment(
+        <if test="cid != 0">
+            cid,
+        </if>
+        aid, userId, date, content, likes
+        )
+        values (
+        <if test="cid != 0">
+            #{cid},
+        </if>
+        #{aid}, #{user.id}, #{date}, #{content}, #{likes}
+        );
+    </insert>
+
+    <update id="addLikes">
+        update comment
+        set likes = likes+1
+        where id = #{id}
+    </update>
 </mapper>

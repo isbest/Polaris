@@ -22,7 +22,7 @@ public class Comment {
     private int id;
     private int cid;
     private int aid;
-    private int userId;
+    private User user;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface CommentService {
     List<Comment> getCommentTreeByAid(int aid);
+    boolean addComment(Comment comment);
+    boolean addLikes(int id);
 }

@@ -122,9 +122,7 @@ $(function () {
             },
             methods: {
                 send() {
-
                     this.makeToast("正在提交", false);
-
                     $.ajax({
                         type: 'post',
                         //传json不加header会报415错误
@@ -164,7 +162,6 @@ $(function () {
                     data.authorId = "";
                     data.title = this.name;
                     data.content = vditor.getValue();
-                    console.log(vditor.getValue());
                     data.releaseDate = this.getNowDate();
                     data.modifyDate = this.getNowDate();
                     data.like = 0;

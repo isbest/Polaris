@@ -26,7 +26,7 @@ const commentEdit = {
         <button @click="closeEdit" class="comment-close-btn" v-if="!isclose">关闭</button>
      </div>
     `,
-    props: ["cid", "isclose"],
+    props: ["cid", "isclose", "aid"],
     data: () => {
         return {
             vditor: null,
@@ -36,7 +36,7 @@ const commentEdit = {
         initVditor() {
             const that = this;
             const options = {
-                height: window.innerHeight / 3,
+                height: 200,
                 theme: 'classic',
                 mode: "wysiwyg",
                 toolbar: [
@@ -110,22 +110,72 @@ const commentEdit = {
                     }
                 },
                 cache: {
-                    enable: true,
-                    id: that.cid + "",
+                    enable: false,
                 }
             };
             this.vditor = new Vditor("edit" + that.cid, options);
         },
         submitCom: function () {
-            alert(this.vditor.getValue() + "  " + this.cid);
+            $.ajax({
+                type: 'post',
+                //传json不加header会报415错误
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                data: this.makeData(),
+                url: "http://localhost:8080/comment/api/add",
+                dataType: "json",
+                success: (data) => {
+                    if(data === -1) {
+                        alert("请先登录");
+                    }
+                    if(data === 1) {
+                        console.log("提交失败，请联系管理员");
+                    }
+                    if(data === 0) {
+                        //清空输入框，关闭输入框
+                        this.vditor.setValue("",true);
+                        this.closeEdit();
+                        this.refresh();
+                    }
+                },
+                error(msg) {
+                    console.log(msg);
+                }
+            });
         },
         closeEdit() {
-            return this.$emit("close")
+            return this.$emit("close");
         },
+        refresh(){
+            return this.$emit("refresh");
+        },
+        makeData(){
+            if(this.vditor.getValue()===null || this.vditor.getValue()==="") {
+                alert("评论内容不能为空");
+                return;
+            }
+            let comment = {};
+            comment.user = null;
+            comment.aid = this.aid;
+            comment.likes = 0;
+            comment.id = null;
+            comment.childCom = null;
+            comment.date = new Date();
+            comment.content = this.vditor.getValue();
+            if (this.cid === 0) {
+                comment.cid = null;
+            } else {
+                comment.cid = this.cid;
+            }
+            console.log(JSON.stringify(comment));
+            return JSON.stringify(comment);
+        }
     },
     mounted() {
-        this.$refs.vditorHost.setAttribute("id", "edit" + this.cid)
-        this.initVditor()
+        this.$refs.vditorHost.setAttribute("id", "edit" + this.cid);
+        this.initVditor();
     },
 }
 
@@ -133,17 +183,17 @@ const commentEdit = {
 const commentBox = {
     template: `
     <div>
-        <div class="commentBox" v-for="item in comments" :key="item.id">
+        <div class="commentBox" v-for="(item,index) in comments" :key="item.id" v-if="comments!==undefined">
             <div class="comment-inner">
                 <div class="comment-inner-avatar">
                     <span>
-                        <img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" :alt="item.userId">
+                        <img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" :alt="item.user.userName">
                     </span>
                 </div>
                 <div class="comment-content">
                     <div class="comment-content-author">
                         <span>
-                            <a :href="'http://localhost:8080/user/info/id?id='+item.userId">{{item.userId}}</a>
+                            <a :href="'http://localhost:8080/user/info/id?id='+item.user.id">{{item.user.userName}}</a>
                         </span>
                         <span>
                             <span>{{item.date}}</span>
@@ -156,13 +206,13 @@ const commentBox = {
                     </div>
                     <ul class="comment-action">
                         <li>
-                            <span @click="like++">
+                            <span @click="addLike(item.id)">
                                 <i class="iconfont icon-dianzan comment-icon"></i>
                                 <span>{{item.likes}}</span>
                             </span>
                         </li>
                         <li>
-                            <span @click="isOpen = true"> 
+                            <span @click="openEdit(index)"> 
                                 <i class="iconfont icon-chakantiezihuifu"></i>
                                 <span>回复</span>
                             </span>
@@ -171,42 +221,55 @@ const commentBox = {
                 </div>
             </div>
              <!--这里的id填写文章id+评论id-->
-             <div class="comment-edit-box">
-                <comment-edit ref="subComEdit" :cid="item.id" :isclose="false" v-if="isOpen" @close="closeEdit"></comment-edit>
+             <div class="comment-edit-box" ref="subComEdit" >
+                <comment-edit :cid="item.id" :isclose="false" @close="closeEdit" :aid="item.aid" @refresh="refresh"></comment-edit>
              </div>
             <div class="sub-com" v-if="item.childCom!==undefined && item.childCom.length>0">
-               <comment-box :comments="item.childCom" ></comment-box>
+               <comment-box :comments="item.childCom" @refresh="refresh"></comment-box>
             </div>
       </div>
     </div>
     `,
-    name:'comment-box',
-    data: () => {
-        return {
-            like: 0,
-            isOpen: false,
-        }
-    },
+    name: 'comment-box',
     methods: {
-        openEdit: function () {
-            if (!this.isOpen) {
-                this.$refs.subComEdit.style = "display: none";
-                this.isOpen = true;
-            }
+        openEdit: function (index) {
+            this.closeEdit();
+            this.$refs.subComEdit[index].style = "display:block";
         },
         closeEdit: function () {
-            this.isOpen = false;
-            this.$refs.subComEdit.style = "display: block";
+            for (let index in this.$refs.subComEdit) {
+                this.$refs.subComEdit[index].style = "display:none";
+            }
+        },
+        refresh() {
+            return this.$emit("refresh");
+        },
+        addLike(id) {
+            console.log(id);
+            $.ajax({
+                type: 'post',
+                //传json不加header会报415错误
+                data: id,
+                url: "http://localhost:8080/comment/api/like/add/"+id,
+                dataType: "json",
+                success: (data) => {
+                    this.refresh();
+                },
+                error(msg) {
+                    alert("点赞失败，请联系管理员");
+                }
+            });
         }
     },
     props: ['comments'],
-    computed: {
-        cid: function () {
-            return "comBox" + this.comment.id;
-        }
-    },
     components: {
         commentEdit,
+    },
+    created() {
+        console.log(this.comments);
+    },
+    mounted() {
+        this.closeEdit();
     }
 }
 
@@ -216,12 +279,8 @@ let article = new Vue({
         contentEditor: "",
         item: {content: "loading..."},
         cid: 0,
-        comments: `[{"id":1,"cid":0,"aid":9,"userId":8,"date":"2020-12-17","content":"   ### hello, this is the first comment","likes":1,"childCom":[]},{"id":2,"cid":0,"aid":9,"userId":9,"date":"2020-12-17","content":"### this is the second comment","likes":0,"childCom":[{"id":3,"cid":2,"aid":9,"userId":8,"date":"2020-12-17","content":"### this is lv2 comment","likes":2,"childCom":[{"id":4,"cid":3,"aid":9,"userId":11,"date":"2020-12-17","content":"### this is lv3 comment","likes":10,"childCom":[]}]}]}]`,
-    },
-    computed: {
-        id: () => {
-            return "comBox" + this.id;
-        },
+        aid: 0,
+        comments: ``,
     },
     methods: {
         getQueryVariable(variable) {
@@ -279,8 +338,10 @@ let article = new Vue({
                 method: "get",
             }).then(res => {
                 article.comments = res.data;
-                console.log(article.comments)
             }).catch(err => alert(err))
+        },
+        refresh(){
+            this.getComTree(this.aid).then(r => console.log("刷新完成"));
         }
     },
     watch: {
@@ -294,8 +355,9 @@ let article = new Vue({
         }
     },
     created() {
-        this.getDetails(9).then(r => console.log("文章数据请求完毕"));
-        this.getComTree(9).then(r => console.log("评论数据请求完毕"));
+        this.aid = this.getQueryVariable("id")
+        this.getDetails(this.aid).then(r => console.log("文章数据请求完毕"));
+        this.getComTree(this.aid).then(r => console.log("评论数据请求完毕"));
     },
     mounted() {
         this.$refs.art.innerHTML = "loading...";

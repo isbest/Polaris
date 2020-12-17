@@ -18,4 +18,14 @@ public class CommentServiceImpl implements CommentService {
     public List<Comment> getCommentTreeByAid(int aid) {
         return commentRepository.getCommentTree(aid);
     }
+
+    @Override
+    public boolean addComment(Comment comment) {
+        return commentRepository.addComment(comment);
+    }
+
+    @Override
+    public boolean addLikes(int id) {
+        return commentRepository.addLikes(id);
+    }
 }
