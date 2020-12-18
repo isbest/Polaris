@@ -8,4 +8,5 @@ public interface TagRepository {
     int putTagFromArticle(Tag tag);
     List<Tag> getArticleTagsById(int id);
     List<Tag> getAllTags();
+    List<Tag> getUserTags(int id);
 }

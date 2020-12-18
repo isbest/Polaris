@@ -49,7 +49,6 @@
             </div>
         </div>
     </div>
-
     <!--友链接-->
     <div class="site-info">
         <div class="site-title">
@@ -78,7 +77,6 @@
             </a>
         </div>
     </div>
-
     <div class="scroll-down">
         <a class="go-to-main"><i class="iconfont icon-xia"></i></a>
     </div>
@@ -163,7 +161,7 @@
                         </div>
                         <div class="post-data-item text-center">
                             <div class="data-link">
-                                <a href="#">
+                                <a :href="'http://localhost:8080/tag/user?id='+info.uid">
                                     <p class="headline">标签</p>
                                     <p class="length-num">{{tagNum}}</p>
                                 </a>
@@ -224,7 +222,7 @@
                         <span>标签</span>
                     </div>
                     <div class="card-tag-cloud">
-                        <a v-for="item in tags" :href="`/article/api/tag/`+item">{{item}}</a>
+                        <a v-for="item in tags" :href="'http://localhost:8080/tag/article/name?name='+item">{{item}}</a>
                     </div>
                 </div>
             </div>

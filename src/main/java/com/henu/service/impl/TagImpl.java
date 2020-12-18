@@ -43,6 +43,11 @@ public class TagImpl implements TagService {
         List<Tag> allTags = tagRepository.getAllTags();
         return BlogUtils.getTags(allTags);
     }
+
+    @Override
+    public List<Tag> getUserTag(int id) {
+        return tagRepository.getUserTags(id);
+    }
 }
 
 

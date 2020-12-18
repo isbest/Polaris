@@ -10,4 +10,7 @@
     <select id="getAllTags" resultType="Tag">
         select * from tags
     </select>
+    <select id="getUserTags" resultType="Tag">
+        select t.tag as tag, t.id as id, t.articleId as articleId from tags t,user u,article a where a.authorId = u.id and t.articleId = a.id  and u.id=#{id} group by t.tag
+    </select>
 </mapper>

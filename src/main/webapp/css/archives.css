@@ -152,3 +152,19 @@ nav {
 .arch-item-post-title:hover {
     color: #125162;
 }
+
+.tag-cloud {
+   text-align: center;
+}
+
+.tag-cloud a {
+    display: inline-block;
+    padding: 0 0.4rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.tag-cloud a:hover {
+    transform: scale(1.1,1.1);
+}

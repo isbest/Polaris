@@ -24,6 +24,7 @@ let userInfo = new Vue({
                 this.userName = res.data.userName;
                 this.info = res.data.userInfo;
                 this.articleNum = res.data.userArticles;
+                this.tagNum = res.data.tags;
             }).catch(err => console.log(err))
         }
     },

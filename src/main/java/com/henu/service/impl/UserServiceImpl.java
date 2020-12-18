@@ -86,6 +86,7 @@ public class UserServiceImpl implements UserService {
         return Code.REGISTER_ERROR;
     }
 
+    //用户的所有文章
     @Override
     @Transactional
     public List<Article> getUserArticles(int id) {
@@ -100,12 +101,13 @@ public class UserServiceImpl implements UserService {
         return userArticles;
     }
 
+    //友链
     @Override
     public UserInfo getUserInfoById(int id) {
         return userInfoRepository.getUserInfoById(id);
     }
 
-    //获取用户信息
+    //获取用户信息 文章数，标签数，友链
     @Override
     @Transactional
     public Map<String, Object> getUserInfo(int id) {
@@ -126,7 +128,7 @@ public class UserServiceImpl implements UserService {
         }
 
         map.put("userArticles", userArticles.size());
-        List<String> tags = BlogUtils.getArticlesTags(userArticles);
+        List<Tag> tags = tagRepository.getUserTags(id);
         if (tags != null) {
             map.put("tags", tags.size());
         }

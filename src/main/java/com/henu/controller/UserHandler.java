@@ -28,7 +28,7 @@ public class UserHandler {
     @Autowired
     private TagService tagService;
 
-
+    //验证码
     @GetMapping("/checkCode")
     public void getCheckCode(HttpServletResponse response) {
         ShearCaptcha captcha = CaptchaUtil.createShearCaptcha(152, 40, 4, 4);
@@ -90,7 +90,7 @@ public class UserHandler {
         return result;
     }
 
-    //获取用户信息
+    //获取用户信息 文章数，标签数，友链
     @RequestMapping("/api/info/{id}")
     @CrossOrigin(origins = "*")
     @ResponseBody

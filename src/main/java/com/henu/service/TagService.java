@@ -8,4 +8,5 @@ public interface TagService {
     boolean putTagFromArticle(List<Tag> tags);
     List<Tag> getArticleTagsById(int id);
     List<String> getAllTags();
+    List<Tag> getUserTag(int id);
 }

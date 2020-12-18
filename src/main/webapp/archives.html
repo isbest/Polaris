@@ -41,7 +41,9 @@
 <div class="content-outer">
     <div class="content-inner">
         <div class="archives-page" id="archives">
-            <info></info>
+            <article-info v-if="flag==='article'"></article-info>
+            <tag-info v-if="flag==='tag'"></tag-info>
+            <article-by-tag v-if="flag==='articleByTag'"></article-by-tag>
         </div>
         <div class="aside_content">
             <!--用户信息-->
@@ -58,7 +60,7 @@
                     <div class="post-data">
                         <div class="post-data-item text-center">
                             <div class="data-link">
-                                <a href="#">
+                                <a :href="'http://localhost:8080/article/archives?id='+info.uid">
                                     <p class="headline">文章</p>
                                     <p class="length-num">{{articleNum}}</p>
                                 </a>
@@ -66,7 +68,7 @@
                         </div>
                         <div class="post-data-item text-center">
                             <div class="data-link">
-                                <a href="#">
+                                <a :href="'http://localhost:8080/tag/user?id='+info.uid">
                                     <p class="headline">标签</p>
                                     <p class="length-num">{{tagNum}}</p>
                                 </a>
@@ -127,7 +129,7 @@
                         <span>标签</span>
                     </div>
                     <div class="card-tag-cloud">
-                        <a v-for="item in tags" :href="`/article/api/tag/`+item">{{item}}</a>
+                        <a v-for="item in tags" :href="'http://localhost:8080/tag/article/name?name='+item">{{item}}</a>
                     </div>
                 </div>
             </div>
