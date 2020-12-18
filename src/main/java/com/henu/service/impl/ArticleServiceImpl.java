@@ -96,4 +96,9 @@ public class ArticleServiceImpl implements ArticleService {
         return articleRepository.getRecentlyArticle(n);
     }
 
+    @Override
+    public List<Article> getUserArticles(int id) {
+        return articleRepository.getUserArticles(id);
+    }
+
 }

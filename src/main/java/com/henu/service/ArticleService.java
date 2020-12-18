@@ -14,4 +14,5 @@ public interface ArticleService {
     int delArticle(Article article);
     List<Article> findArticleByPage(int offset, int pageSize);
     List<Article> getRecentlyArticle(int n);
+    List<Article> getUserArticles(int id);
 }

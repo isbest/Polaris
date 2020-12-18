@@ -349,8 +349,8 @@ let article = new Vue({
             //开启深度监控
             deep: true,
             handler(obj) {
-                this.renderMarkdown(obj.content);
-                this.renderOutline(obj.content);
+                this.renderMarkdown(obj.content).then(r => console.log("重新渲染完毕"));
+                this.renderOutline(obj.content).then(r => console.log("大纲渲染完毕"));
             }
         }
     },

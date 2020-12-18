@@ -50,7 +50,7 @@ let summary = new Vue({
         gotopage(index) {
             this.current = index;
             this.getArticlesOfPage(index);
-        }
+        },
     },
     //获取分页数据
     created() {
@@ -59,55 +59,5 @@ let summary = new Vue({
     },
     components: {
         pagination
-    }
-});
-
-let userInfo = new Vue({
-    el: "#userInfo",
-    data: {
-        info: {},
-        userName: 'loading',
-        articleNum: 0,
-        tagNum: 0
-    },
-    created() {
-        axios("http://localhost:8080/user/api/info/9").then(res => {
-            userInfo.userName = res.data.userName;
-            userInfo.info = res.data.userInfo;
-            userInfo.articleNum = res.data.userArticles;
-            userInfo.tagNum = res.data.tags;
-            console.log("userInfo.info 数据请求完成");
-            console.log(res.data);
-        }).catch(err => console.log(err))
-    }
-});
-
-let tag = new Vue({
-    el: "#tags",
-    data: {
-        tags: []
-    },
-    created() {
-        axios("http://localhost:8080/user/api/info/tags").then(res => {
-            tag.tags = res.data;
-            console.log("tags.tags 数据请求完成");
-            console.log(res.data);
-        }).catch(err => console.log(err))
-    }
-});
-
-let systemInfo = new Vue({
-    el: "#sysInfo",
-    data: {
-        articlesNum: 0,
-        runDays: 0
-    },
-    created() {
-        axios("http://localhost:8080/system/api/sysInfo").then(res => {
-            systemInfo.articlesNum = res.data.articlesNum;
-            systemInfo.runDays = res.data.runDays;
-            console.log("systemInfo 数据请求完成");
-            console.log(res.data);
-        }).catch(err => console.log(err))
     }
 });

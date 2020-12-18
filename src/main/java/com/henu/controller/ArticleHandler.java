@@ -7,6 +7,7 @@ import com.henu.entity.Tag;
 import com.henu.entity.User;
 import com.henu.service.ArticleService;
 import com.henu.service.TagService;
+import com.henu.utils.BlogUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -122,35 +123,69 @@ public class ArticleHandler {
     }
 
     @RequestMapping("/id")
-    public String toArticle(int id){
-       return "article";
+    public String toArticle(int id) {
+        return "article";
     }
 
-    //所有文章，测试用
-    @PostMapping("/api/getArticles")
-    @ResponseBody
+    @RequestMapping("/api/timeLine")
     @CrossOrigin(origins = "*")
-    public List<Article> getArticles(){
-        List<Article> all = articleService.findAll();
-        return all;
+    @ResponseBody
+    public List<Article> getTimeLine() {
+        return articleService.findAll();
     }
+
 
     //最近文章
     @ResponseBody
     @RequestMapping("/api/recent/{n}")
     @CrossOrigin(origins = "*")
     public List<Article> getRecentlyArticle(@PathVariable String n) {
-        List<Article> recentlyArticle = articleService.getRecentlyArticle(Integer.parseInt(n));
-        return   recentlyArticle;
+        return articleService.getRecentlyArticle(Integer.parseInt(n));
     }
 
     //文章分页
     @GetMapping("/api/page/{pageNum}")
     @ResponseBody
     @CrossOrigin(origins = "*")
-    public List<Article> getArticleByPage(@PathVariable String pageNum){
-        List<Article> articleByPage = articleService.findArticleByPage(Integer.parseInt(pageNum)*pageSize, pageSize);
+    public List<Article> getArticleByPage(@PathVariable String pageNum) {
+        List<Article> articleByPage = articleService.findArticleByPage(Integer.parseInt(pageNum) * pageSize, pageSize);
         return articleByPage;
+    }
+
+    //所有文章测试
+    @RequestMapping("/api/getArticles")
+    @CrossOrigin(origins = "*")
+    @ResponseBody
+    public List<Article> getArticles() {
+        return articleService.findAll();
+    }
+
+    //按时间排序升序 在线用户
+    @RequestMapping("/time/line")
+    @ResponseBody
+    @CrossOrigin(origins = "*")
+    public List<Article> getArticleByUser(HttpServletRequest request){
+        User user = (User) request.getSession().getAttribute("user");
+        if(user == null) {
+            return null;
+        }
+        List<Article> userArticles = articleService.getUserArticles(user.getId());
+        return BlogUtils.desOrderByDate(userArticles);
+    }
+
+    //按时间排序升序api
+    @RequestMapping("/api/time/line/{id}")
+    @ResponseBody
+    @CrossOrigin(origins = "*")
+    public List<Article> getArticleInfoById(@PathVariable String id){
+        List<Article> userArticles = articleService.getUserArticles(Integer.parseInt(id));
+        return BlogUtils.desOrderByDate(userArticles);
+    }
+
+    //页面跳转
+    @RequestMapping("/archives")
+    public String toArchives(int id) {
+        return "archives";
     }
 
     //按照标签查询
@@ -160,5 +195,6 @@ public class ArticleHandler {
     public List<Article> findArticleByTagName(@PathVariable String tag) {
         return articleService.findByTag(tag);
     }
+
 
 }
