@@ -13,15 +13,64 @@
         <trim prefix="set" suffixOverrides=",">
             <if test="github!=null">github=#{github},</if>
             <if test="qq!=null">qq=#{qq},</if>
-            <if test="csdn!=null">sex=#{csdn},</if>
-            <if test="motto!=null">motto=#{motto},</if>t
+            <if test="csdn!=null">csdn=#{csdn},</if>
+            <if test="motto!=null">motto=#{motto},</if>
+            <if test="avatarURL!=null">avatarURL=#{avatarURL},</if>
         </trim>
-        where id = #{id}
-    </update>
-
-    <update id="updateUserAvatar" parameterType="String">
-        update userInfo
-        set avatarURL = #{avatarURL}
         where uid = #{uid}
     </update>
+
+    <select id="isUserInfoExist" parameterType="int" resultType="UserInfo">
+        select *
+        from userInfo
+        where uid = #{uid}
+    </select>
+
+    <sql id="key">
+        <trim suffixOverrides=",">
+            <if test="github!=null">
+                uid,
+            </if>
+            <if test="github!=null">
+                github,
+            </if>
+            <if test="csdn!=null">
+                csdn,
+            </if>
+            <if test="qq!=null">
+                qq,
+            </if>
+            <if test="motto!=null">
+                motto,
+            </if>
+            <if test="avatarURL!=null">
+                avatarURL,
+            </if>
+        </trim>
+    </sql>
+    <sql id="value">
+        <trim suffixOverrides=",">
+            <if test="github!=null">
+                #{uid},
+            </if>
+            <if test="github!=null">
+                #{github},
+            </if>
+            <if test="csdn!=null">
+                #{csdn},
+            </if>
+            <if test="qq!=null">
+                #{qq},
+            </if>
+            <if test="motto!=null">
+                #{motto},
+            </if>
+            <if test="avatarURL!=null">
+                #{avatarURL},
+            </if>
+        </trim>
+    </sql>
+    <insert id="addInfo">
+        insert into userInfo(<include refid="key"/>) values(<include refid="value"/>);
+    </insert>
 </mapper>

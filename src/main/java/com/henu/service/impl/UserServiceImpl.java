@@ -119,7 +119,16 @@ public class UserServiceImpl implements UserService {
         }
 
         map.put("userName", user.getUserName());
-        map.put("userInfo", getUserInfoById(id));
+        UserInfo userInfoById = getUserInfoById(id);
+        System.out.println("userinfo    findById" + userInfoById);
+        if(userInfoById==null) {
+            UserInfo userInfo = new UserInfo();
+            userInfo.setUid(id);
+            System.out.println("userinfo    findById" + userInfoById);
+            map.put("userInfo", userInfo);
+        } else {
+            map.put("userInfo", userInfoById);
+        }
 
         List<Article> userArticles = getUserArticles(id);
         if (userArticles == null) {
@@ -133,6 +142,7 @@ public class UserServiceImpl implements UserService {
         if (tags != null) {
             map.put("tags", tags.size());
         }
+
         return map;
     }
 
@@ -145,12 +155,9 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public int updateUserInfo(UserInfo userInfo) {
+        if(userInfoRepository.isUserInfoExist(userInfo.getUid()) == null){
+            return userInfoRepository.addInfo(userInfo);
+        }
         return userInfoRepository.updateUserInfo(userInfo);
-    }
-
-    @Override
-    @Transactional
-    public int uploadAvatar(String avatarURL,int uid) {
-        return userInfoRepository.updateUserAvatar(avatarURL, uid);
     }
 }

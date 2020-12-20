@@ -19,8 +19,8 @@ let userInfo = new Vue({
             }
             return false;
         },
-        getUserInfo(id) {
-            axios("http://localhost:8080/user/api/info/"+id).then(res => {
+        getUserInfo() {
+            axios("http://localhost:8080/user/api/info").then(res => {
                 this.userName = res.data.userName;
                 this.info = res.data.userInfo;
                 this.articleNum = res.data.userArticles;
@@ -29,7 +29,7 @@ let userInfo = new Vue({
         }
     },
     created() {
-        this.getUserInfo(9);
+        this.getUserInfo();
     }
 });
 

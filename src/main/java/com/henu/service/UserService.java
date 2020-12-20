@@ -31,5 +31,4 @@ public interface UserService {
 
     int updateUserInfo(UserInfo userInfo);
 
-    int uploadAvatar(String avatarURL, int uid);
 }
