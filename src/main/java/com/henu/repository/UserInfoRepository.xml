@@ -3,6 +3,25 @@
 <mapper namespace="com.henu.repository.UserInfoRepository">
 
     <select id="getUserInfoById" resultType="UserInfo">
-        select * from userInfo where uid = #{id};
+        select *
+        from userInfo
+        where uid = #{id};
     </select>
+
+    <update id="updateUserInfo" parameterType="UserInfo">
+        update userInfo
+        <trim prefix="set" suffixOverrides=",">
+            <if test="github!=null">github=#{github},</if>
+            <if test="qq!=null">qq=#{qq},</if>
+            <if test="csdn!=null">sex=#{csdn},</if>
+            <if test="motto!=null">motto=#{motto},</if>t
+        </trim>
+        where id = #{id}
+    </update>
+
+    <update id="updateUserAvatar" parameterType="String">
+        update userInfo
+        set avatarURL = #{avatarURL}
+        where uid = #{uid}
+    </update>
 </mapper>

@@ -10,7 +10,6 @@ public class UserInfo {
     private int uid;
     private String github;
     private String qq;
-    private String telegram;
     private String csdn;
     private String motto;
     private String avatarURL;

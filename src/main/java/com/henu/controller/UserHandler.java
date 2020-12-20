@@ -4,6 +4,7 @@ import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.ShearCaptcha;
 import com.henu.code.Code;
 import com.henu.entity.User;
+import com.henu.entity.UserInfo;
 import com.henu.service.TagService;
 import com.henu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,6 +99,14 @@ public class UserHandler {
         return userService.getUserInfo(Integer.parseInt(id));
     }
 
+    //获取用户信息
+    @RequestMapping("/api/user/{id}")
+    @ResponseBody
+    @CrossOrigin(origins = "*")
+    public User findById(@PathVariable String id) {
+        return userService.findByID(Integer.parseInt(id));
+    }
+
     //跳转用户信息页面
     @RequestMapping("/info/id")
     public String toUserInfo(int id) {
@@ -110,6 +119,24 @@ public class UserHandler {
     @ResponseBody
     public List<String> getAllTags() {
         return tagService.getAllTags();
+    }
+
+
+    //更新用户信息
+    @PostMapping("/update/user")
+    public Map<String,Object> updateUser(@RequestBody User user) {
+        Map<String,Object> map = new HashMap<>();
+        System.out.println(user);
+        map.put("res",userService.updateUser(user));
+        return map;
+    }
+
+    //更新用户链接信息
+    @PostMapping("/update/userinfo")
+    public Map<String,Object>  updateUserInfo(@RequestBody UserInfo userInfo) {
+        Map<String,Object> map = new HashMap<>();
+        map.put("res",userService.updateUserInfo(userInfo));
+        return map;
     }
 
 }

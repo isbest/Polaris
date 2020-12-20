@@ -10,4 +10,5 @@ public interface UserRepository {
      int insertUser(User user);
      User findByName(String username);
      User findByEmail(String email);
+     int updateUser(User user);
 }

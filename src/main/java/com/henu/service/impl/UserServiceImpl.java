@@ -74,6 +74,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public int register(User user) {
         User byEmail = userRepository.findByEmail(user.getEmail());
         if (byEmail != null) {
@@ -133,5 +134,23 @@ public class UserServiceImpl implements UserService {
             map.put("tags", tags.size());
         }
         return map;
+    }
+
+    @Override
+    @Transactional
+    public int updateUser(User user) {
+        return userRepository.updateUser(user);
+    }
+
+    @Override
+    @Transactional
+    public int updateUserInfo(UserInfo userInfo) {
+        return userInfoRepository.updateUserInfo(userInfo);
+    }
+
+    @Override
+    @Transactional
+    public int uploadAvatar(String avatarURL,int uid) {
+        return userInfoRepository.updateUserAvatar(avatarURL, uid);
     }
 }
